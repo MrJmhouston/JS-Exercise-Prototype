@@ -20,6 +20,7 @@ Airplane.prototype.land = function () {
 };
 
 
+
 /*
 // 👇 COMPLETE YOUR WORK BELOW 👇
 // 👇 COMPLETE YOUR WORK BELOW 👇
@@ -39,9 +40,41 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
-
+function Person (name, age) {
+  this.name = name;
+  this.age = age;
+  this.stomach = [];
 }
+Person.prototype.eat = function (edible) {
+  if (this.stomach.length <= 9) {
+    this.stomach.push(edible)
+  }
+}
+Person.prototype.poop = function () {
+  this.stomach = [];
+}
+
+Person.prototype.toString = function () {
+  return `${this.name}, ${this.age}`;
+}
+
+const personOne = new Person('Jack', 24);
+
+
+  personOne.eat('pzza');
+  personOne.eat('rice');
+  personOne.eat('grapes');
+  personOne.eat('chcken');
+  personOne.eat('beef');
+  personOne.eat('pork');
+  personOne.eat('fish');
+  personOne.eat('crackers');
+  personOne.eat('lamb');
+  personOne.eat('turkey');
+
+console.log(personOne);
+console.log(personOne.stomach)
+
 
 /*
   TASK 2
@@ -57,9 +90,16 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
-
+function Car(model, milesPerGallon) {
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 }
+Car.prototype.fill = function (gallons) {
+  this.tank = this.tank + gallons;
+}
+
 
 /*
   TASK 3
@@ -68,18 +108,27 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+  this.name = name;
+  this.age = age;
+  this.favoriteToy = favoriteToy;
 }
+Baby.prototype = Object.create(Person.prototype);
+Baby.prototype.play = function () {
+  return (`${this.name} plays with their ${this.favoriteToy} everyday.`)
+}
+
+
+
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. when 'this' is used in the global scope it will be the console object.
+  2. 'this.' always refers to what is left of the dot.
+  3. objects with methods is the only use case.
+  4. 'this' is explicitly defined when we use .call and/or .apply
 */
 
 
